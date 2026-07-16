@@ -1,0 +1,60 @@
+@import "tailwindcss";
+
+/* Palette drawn from the materials the specs already name: rosewood
+   fingerboards, bone nuts, nickel hardware. Each guitar supplies its own
+   accent at runtime, taken from its actual finish. */
+@theme {
+  --color-rosewood: #211e1c;
+  --color-rosewood-raise: #2a2624;
+  --color-rosewood-deep: #191716;
+  --color-bone: #e8e3d9;
+  --color-bone-dim: #b8b1a4;
+  --color-nickel: #9ba0a3;
+  --color-rule: rgba(232, 227, 217, 0.12);
+
+  --font-display: "Fraunces", Georgia, serif;
+  --font-sans: "IBM Plex Sans", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+}
+
+:root {
+  color-scheme: dark;
+}
+
+body {
+  margin: 0;
+  background: var(--color-rosewood);
+  color: var(--color-bone);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Fraunces is variable: no wonk, high optical size, so the display face reads
+   like a period catalogue rather than a novelty. */
+.font-display {
+  font-variation-settings: "SOFT" 0, "WONK" 0, "opsz" 120;
+}
+
+:where(a, button, [tabindex]):focus-visible {
+  outline: 2px solid var(--color-bone);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

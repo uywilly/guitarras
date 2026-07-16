@@ -1,0 +1,11 @@
+node_modules/
+dist/
+.DS_Store
+*.log
+
+# Originales de cámara y de scraping (~86 MB). El sitio publica las webp
+# optimizadas en site/public/images, que sí van al repo. Para correr
+# `npm run sync` hace falta esta carpeta local.
+# La barra inicial ancla el patrón a la raíz: sin ella también excluiría
+# site/public/images y el sitio quedaría sin fotos.
+/images/
