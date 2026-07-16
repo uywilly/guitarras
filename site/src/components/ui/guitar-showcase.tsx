@@ -43,13 +43,13 @@ export function GuitarShowcase() {
           origin="top-right"
           rayColor1={guitar.accent}
           rayColor2="#e8e3d9"
-          speed={0.5}
-          intensity={1.6}
+          speed={1.6}
+          intensity={2.4}
           spread={1.6}
           saturation={1.1}
           blend={0.28}
-          falloff={1.9}
-          opacity={0.8}
+          falloff={1.5}
+          opacity={1}
         />
       </div>
 
