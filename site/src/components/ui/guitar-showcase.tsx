@@ -3,6 +3,7 @@ import { ArrowLeft, ArrowRight, ArrowUpRight, Play } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { guitars } from "@/data/guitars";
 import { FretboardNav } from "./fretboard-nav";
+import { SideRays } from "./side-rays";
 
 export function GuitarShowcase() {
   const [index, setIndex] = useState(0);
@@ -34,6 +35,24 @@ export function GuitarShowcase() {
 
   return (
     <div className="mx-auto flex min-h-dvh max-w-6xl flex-col px-5 sm:px-8">
+      {/* Raking light across the whole page, in the finish of whichever guitar
+          is up — the same accent the inlay dot and the spec rule already use.
+          It sits under the content and takes no clicks. */}
+      <div className="pointer-events-none fixed inset-0 -z-10">
+        <SideRays
+          origin="top-right"
+          rayColor1={guitar.accent}
+          rayColor2="#e8e3d9"
+          speed={0.5}
+          intensity={1.6}
+          spread={1.6}
+          saturation={1.1}
+          blend={0.28}
+          falloff={1.9}
+          opacity={0.8}
+        />
+      </div>
+
       <Header />
 
       <main className="flex flex-1 flex-col gap-10 py-8 lg:flex-row lg:gap-14 lg:py-12">
