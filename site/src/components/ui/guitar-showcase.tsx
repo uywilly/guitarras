@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { ArrowLeft, ArrowRight, ArrowUpRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { guitars } from "@/data/guitars";
@@ -67,16 +67,55 @@ function ImageStage({
   onShot: (index: number) => void;
 }) {
   const isPhoto = guitar.imageKind === "photo";
+  const src = guitar.images[shot];
+
+  const [zoomed, setZoomed] = useState(false);
+  const [origin, setOrigin] = useState({ x: 50, y: 50 });
+  const stageRef = useRef<HTMLButtonElement>(null);
+
+  // A new shot under a zoomed lens would land on an arbitrary crop.
+  useEffect(() => setZoomed(false), [src]);
+
+  useEffect(() => {
+    if (!zoomed) return;
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key !== "Escape") return;
+      setZoomed(false);
+      stageRef.current?.focus();
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [zoomed]);
+
+  const pointTo = (event: React.MouseEvent<HTMLElement>) => {
+    const rect = event.currentTarget.getBoundingClientRect();
+    setOrigin({
+      x: ((event.clientX - rect.left) / rect.width) * 100,
+      y: ((event.clientY - rect.top) / rect.height) * 100,
+    });
+  };
 
   return (
     <div className="lg:sticky lg:top-8 lg:h-fit lg:w-1/2 lg:shrink-0">
       {/* Two treatments, because the source material genuinely is two things.
           Press cutouts float on an accent wash. Real photographs (the ESP is
           only documented in the wild) get a frame instead of pretending. */}
-      <div
+      <button
+        ref={stageRef}
+        type="button"
+        // Click zooms where you clicked; while zoomed the pointer pans the crop.
+        onClick={(event) => {
+          pointTo(event);
+          setZoomed((on) => !on);
+        }}
+        onMouseMove={(event) => zoomed && pointTo(event)}
+        onMouseLeave={() => setZoomed(false)}
+        aria-label={zoomed ? "Alejar la imagen" : "Ampliar la imagen"}
+        aria-pressed={zoomed}
         className={cn(
-          "relative flex items-center justify-center overflow-hidden rounded-sm lg:min-h-[440px]",
-          isPhoto && "border border-rule",
+          "relative flex w-full items-center justify-center overflow-hidden rounded-sm border-0 p-0 lg:min-h-[440px]",
+          zoomed ? "cursor-zoom-out" : "cursor-zoom-in",
+          isPhoto ? "border border-rule" : "bg-transparent",
         )}
         style={
           isPhoto
@@ -86,18 +125,18 @@ function ImageStage({
       >
         <img
           // Keying on the src restarts the fade whenever the shot changes.
-          key={guitar.images[shot]}
-          src={guitar.images[shot]}
+          key={src}
+          src={src}
           alt={`${guitar.name} — foto ${shot + 1} de ${guitar.images.length}`}
           loading="lazy"
           className={cn(
-            "animate-[fade_500ms_ease-out]",
-            isPhoto
-              ? "max-h-[62vh] w-full object-cover"
-              : "max-h-[62vh] w-full object-contain",
+            "animate-[fade_500ms_ease-out] max-h-[62vh] w-full transition-transform duration-300 ease-out",
+            isPhoto ? "object-cover" : "object-contain",
+            zoomed && "scale-[2.2]",
           )}
+          style={{ transformOrigin: `${origin.x}% ${origin.y}%` }}
         />
-      </div>
+      </button>
 
       {guitar.images.length > 1 && (
         <ul className="mt-3 flex list-none gap-2 p-0">
