@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { ArrowLeft, ArrowRight, ArrowUpRight } from "lucide-react";
+import { ArrowLeft, ArrowRight, ArrowUpRight, Play } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { guitars } from "@/data/guitars";
 import { FretboardNav } from "./fretboard-nav";
@@ -20,7 +20,11 @@ export function GuitarShowcase() {
   useEffect(() => {
     const onKey = (event: KeyboardEvent) => {
       const el = document.activeElement;
-      if (el instanceof HTMLElement && ["INPUT", "TEXTAREA"].includes(el.tagName)) return;
+      if (
+        el instanceof HTMLElement &&
+        ["INPUT", "TEXTAREA"].includes(el.tagName)
+      )
+        return;
       if (event.key === "ArrowLeft") goPrev();
       if (event.key === "ArrowRight") goNext();
     };
@@ -67,6 +71,9 @@ function ImageStage({
   onShot: (index: number) => void;
 }) {
   const isPhoto = guitar.imageKind === "photo";
+  // The demo video sits one past the last photo: same strip, same selection.
+  const video = guitar.video;
+  const showVideo = shot === guitar.images.length;
   const src = guitar.images[shot];
 
   const [zoomed, setZoomed] = useState(false);
@@ -97,49 +104,72 @@ function ImageStage({
 
   return (
     <div className="lg:sticky lg:top-8 lg:h-fit lg:w-1/2 lg:shrink-0">
-      {/* Two treatments, because the source material genuinely is two things.
-          Press cutouts float on an accent wash. Real photographs (the ESP is
-          only documented in the wild) get a frame instead of pretending. */}
-      <button
-        ref={stageRef}
-        type="button"
-        // Click zooms where you clicked; while zoomed the pointer pans the crop.
-        onClick={(event) => {
-          pointTo(event);
-          setZoomed((on) => !on);
-        }}
-        onMouseMove={(event) => zoomed && pointTo(event)}
-        onMouseLeave={() => setZoomed(false)}
-        aria-label={zoomed ? "Alejar la imagen" : "Ampliar la imagen"}
-        aria-pressed={zoomed}
-        className={cn(
-          "relative flex w-full items-center justify-center overflow-hidden rounded-sm border-0 p-0 lg:min-h-[440px]",
-          zoomed ? "cursor-zoom-out" : "cursor-zoom-in",
-          isPhoto ? "border border-rule" : "bg-transparent",
-        )}
-        style={
-          isPhoto
-            ? undefined
-            : { background: `radial-gradient(ellipse at center, ${guitar.accent}1f 0%, transparent 68%)` }
-        }
-      >
-        <img
-          // Keying on the src restarts the fade whenever the shot changes.
-          key={src}
-          src={src}
-          alt={`${guitar.name} — foto ${shot + 1} de ${guitar.images.length}`}
-          loading="lazy"
+      {showVideo && video ? (
+        // Player and caption together occupy the photo stage's height, so the
+        // strip below doesn't jump as you move between a photo and the video.
+        <figure className="m-0 flex flex-col justify-center lg:min-h-[440px]">
+          <div className="relative aspect-video w-full overflow-hidden rounded-sm border border-rule bg-rosewood-deep">
+            {/* nocookie, and mounted only once the video is chosen: the page
+                itself never phones YouTube. */}
+            <iframe
+              src={`https://www.youtube-nocookie.com/embed/${video.id}?rel=0&autoplay=1`}
+              title={video.title}
+              allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
+              allowFullScreen
+              className="absolute inset-0 size-full border-0"
+            />
+          </div>
+          <figcaption className="mt-3 font-mono text-[11px] tracking-wide text-nickel">
+            {video.channel}
+          </figcaption>
+        </figure>
+      ) : (
+        /* Two treatments, because the source material genuinely is two things.
+         Press cutouts float on an accent wash. Real photographs (the ESP is
+         only documented in the wild) get a frame instead of pretending. */
+        <button
+          ref={stageRef}
+          type="button"
+          // Click zooms where you clicked; while zoomed the pointer pans the crop.
+          onClick={(event) => {
+            pointTo(event);
+            setZoomed((on) => !on);
+          }}
+          onMouseMove={(event) => zoomed && pointTo(event)}
+          onMouseLeave={() => setZoomed(false)}
+          aria-label={zoomed ? "Alejar la imagen" : "Ampliar la imagen"}
+          aria-pressed={zoomed}
           className={cn(
-            "animate-[fade_500ms_ease-out] max-h-[62vh] w-full transition-transform duration-300 ease-out",
-            isPhoto ? "object-cover" : "object-contain",
-            zoomed && "scale-[2.2]",
+            "relative flex w-full items-center justify-center overflow-hidden rounded-sm border-0 p-0 lg:min-h-[440px]",
+            zoomed ? "cursor-zoom-out" : "cursor-zoom-in",
+            isPhoto ? "border border-rule" : "bg-transparent",
           )}
-          style={{ transformOrigin: `${origin.x}% ${origin.y}%` }}
-        />
-      </button>
+          style={
+            isPhoto
+              ? undefined
+              : {
+                  background: `radial-gradient(ellipse at center, ${guitar.accent}1f 0%, transparent 68%)`,
+                }
+          }
+        >
+          <img
+            // Keying on the src restarts the fade whenever the shot changes.
+            key={src}
+            src={src}
+            alt={`${guitar.name} — foto ${shot + 1} de ${guitar.images.length}`}
+            loading="lazy"
+            className={cn(
+              "animate-[fade_500ms_ease-out] max-h-[62vh] w-full transition-transform duration-300 ease-out",
+              isPhoto ? "object-cover" : "object-contain",
+              zoomed && "scale-[2.2]",
+            )}
+            style={{ transformOrigin: `${origin.x}% ${origin.y}%` }}
+          />
+        </button>
+      )}
 
-      {guitar.images.length > 1 && (
-        <ul className="mt-3 flex list-none gap-2 p-0">
+      {(guitar.images.length > 1 || video) && (
+        <ul className="mt-3 flex list-none items-center gap-2 p-0">
           {guitar.thumbs.map((thumb, i) => (
             <li key={thumb}>
               <button
@@ -149,13 +179,53 @@ function ImageStage({
                 aria-current={i === shot ? "true" : undefined}
                 className={cn(
                   "size-14 cursor-pointer overflow-hidden rounded-sm border bg-rosewood-deep p-1 transition-opacity",
-                  i === shot ? "border-bone/50 opacity-100" : "border-rule opacity-50 hover:opacity-90",
+                  i === shot && !showVideo
+                    ? "border-bone/50 opacity-100"
+                    : "border-rule opacity-50 hover:opacity-90",
                 )}
               >
-                <img src={thumb} alt="" loading="lazy" className="size-full object-contain" />
+                <img
+                  src={thumb}
+                  alt=""
+                  loading="lazy"
+                  className="size-full object-contain"
+                />
               </button>
             </li>
           ))}
+
+          {/* Last position on the strip, and the only one that isn't a
+              photograph — so it keeps the 16:9 of the frame it came from. */}
+          {video && (
+            <li>
+              <button
+                type="button"
+                onClick={() => onShot(guitar.images.length)}
+                aria-label="Ver el video"
+                aria-current={showVideo ? "true" : undefined}
+                title={video.title}
+                className={cn(
+                  "group relative h-14 w-24 cursor-pointer overflow-hidden rounded-sm border bg-rosewood-deep p-0 transition-opacity",
+                  showVideo
+                    ? "border-bone/50 opacity-100"
+                    : "border-rule opacity-50 hover:opacity-90",
+                )}
+              >
+                <img
+                  src={video.thumb}
+                  alt=""
+                  loading="lazy"
+                  className="size-full object-cover"
+                />
+                <span
+                  aria-hidden
+                  className="absolute inset-0 flex items-center justify-center bg-rosewood-deep/45 transition-colors group-hover:bg-rosewood-deep/20"
+                >
+                  <Play className="size-4 fill-bone text-bone" />
+                </span>
+              </button>
+            </li>
+          )}
         </ul>
       )}
     </div>
@@ -174,7 +244,9 @@ function SpecPanel({
   return (
     <div className="flex min-w-0 flex-1 flex-col">
       <p className="font-mono text-[11px] tracking-[0.18em] text-nickel uppercase">
-        {[guitar.brand, guitar.series].filter((part) => part && part !== "N/D").join(" · ")}
+        {[guitar.brand, guitar.series]
+          .filter((part) => part && part !== "N/D")
+          .join(" · ")}
       </p>
 
       <h1 className="font-display mt-3 text-4xl leading-[1.05] font-semibold text-balance sm:text-5xl">
@@ -185,7 +257,11 @@ function SpecPanel({
         {[guitar.type, guitar.origin].filter(Boolean).join(" · ")}
       </p>
 
-      <span aria-hidden className="mt-6 h-px w-16" style={{ backgroundColor: guitar.accent }} />
+      <span
+        aria-hidden
+        className="mt-6 h-px w-16"
+        style={{ backgroundColor: guitar.accent }}
+      />
 
       <dl className="mt-6 grid grid-cols-1 gap-x-10 gap-y-0 sm:grid-cols-2">
         {guitar.specs.map((spec) => (
@@ -193,8 +269,12 @@ function SpecPanel({
             key={spec.label}
             className="flex items-baseline justify-between gap-4 border-b border-rule py-2.5"
           >
-            <dt className="shrink-0 text-xs tracking-wide text-nickel">{spec.label}</dt>
-            <dd className="m-0 text-right font-mono text-xs text-bone">{spec.value}</dd>
+            <dt className="shrink-0 text-xs tracking-wide text-nickel">
+              {spec.label}
+            </dt>
+            <dd className="m-0 text-right font-mono text-xs text-bone">
+              {spec.value}
+            </dd>
           </div>
         ))}
       </dl>
@@ -222,7 +302,9 @@ function SpecPanel({
       )}
 
       <div className="mt-8 flex flex-wrap items-center justify-between gap-4">
-        <span className="font-mono text-xs tracking-[0.12em] text-nickel">{guitar.code}</span>
+        <span className="font-mono text-xs tracking-[0.12em] text-nickel">
+          {guitar.code}
+        </span>
         <a
           href={guitar.source}
           target="_blank"

@@ -10,6 +10,15 @@ export interface Review {
   sourceUrl: string;
 }
 
+export interface Video {
+  /** YouTube id — checked to exist and to allow embedding. */
+  id: string;
+  title: string;
+  channel: string;
+  /** Locally hosted poster frame, so no request reaches YouTube unplayed. */
+  thumb: string;
+}
+
 export interface Guitar {
   id: string;
   code: string;
@@ -27,6 +36,8 @@ export interface Guitar {
   specs: Spec[];
   /** null when no real review of this exact model exists. */
   review: Review | null;
+  /** null when no embeddable demo of the model was found. */
+  video: Video | null;
   source: string;
 }
 
@@ -123,6 +134,12 @@ export const guitars: Guitar[] = [
       "sourceLabel": "Comprador verificado en zZounds",
       "sourceUrl": "https://www.zzounds.com/productreview--SQU0374090"
     },
+    "video": {
+      "id": "fjhOBcHYwEA",
+      "title": "Fender Squier Classic Vibe '70s Jaguar - Surf Green",
+      "channel": "Tapestry Music",
+      "thumb": "video/0374090557.webp"
+    },
     "source": "https://intl.fender.com/products/classic-vibe-70s-jaguar"
   },
   {
@@ -217,6 +234,12 @@ export const guitars: Guitar[] = [
       }
     ],
     "review": null,
+    "video": {
+      "id": "iL8i9HB-Fc0",
+      "title": "Introducing the Epiphone Joe Bonamassa ’59 Les Paul Custom",
+      "channel": "OfficialEpiphone",
+      "thumb": "video/EIJBLPCBGB1.webp"
+    },
     "source": "https://www.gibson.com/products/epiphone-joe-bonamassa-59-les-paul-custom-antique-ebony"
   },
   {
@@ -315,6 +338,12 @@ export const guitars: Guitar[] = [
       "sourceLabel": "Comprador verificado en zZounds",
       "sourceUrl": "https://www.zzounds.com/productreview--EPIEISC"
     },
+    "video": {
+      "id": "k43bn9gA7jY",
+      "title": "Epiphone SG Custom Ebony | NAMM 2020 | SOUNDBITES",
+      "channel": "guitarguitar",
+      "thumb": "video/EISCEBGH1.webp"
+    },
     "source": "https://www.gibson.com/products/epiphone-sg-custom-ebony"
   },
   {
@@ -404,6 +433,12 @@ export const guitars: Guitar[] = [
       "quote": "Me acaba de llegar mi Ibanez electroacústica Advanced: instrumento hermoso, gran sonido.",
       "sourceLabel": "Comprador verificado en zZounds",
       "sourceUrl": "https://www.zzounds.com/productreview--IBAAAD50CE"
+    },
+    "video": {
+      "id": "sY2gNo_oQ7Q",
+      "title": "Ibanez Advanced Acoustic AAD50CE",
+      "channel": "Ibanez Guitars",
+      "thumb": "video/AAD50CELG.webp"
     },
     "source": "https://www.ibanez.com/eu/products/detail/aad50ce_1x_04.html"
   },
@@ -495,6 +530,12 @@ export const guitars: Guitar[] = [
       "sourceLabel": "MusicRadar",
       "sourceUrl": "https://www.musicradar.com/reviews/guitars/squier-classic-vibe-stratocaster-50s-175425"
     },
+    "video": {
+      "id": "j8lBH0Mr3QM",
+      "title": "Squier Classic Vibe 50s Stratocaster Demo For Beginners",
+      "channel": "Fender",
+      "thumb": "video/0374005540.webp"
+    },
     "source": "https://intl.fender.com/products/classic-vibe-50s-stratocaster"
   },
   {
@@ -584,6 +625,12 @@ export const guitars: Guitar[] = [
       "quote": "Creo que es una de las mejores guitarras por su precio en el mercado. Me encanta el encordado a través del cuerpo. Es simplemente una buena guitarra apenas la sacás de la caja: tiene un mástil rápido y muy buen tono.",
       "sourceLabel": "Comprador verificado en zZounds",
       "sourceUrl": "https://www.zzounds.com/productreview--JAC2910023"
+    },
+    "video": {
+      "id": "d4-R4vFj0C4",
+      "title": "Jackson JS32T and JS32 Kelly Demo | Featured Demo",
+      "channel": "Jackson Guitars",
+      "thumb": "video/2910124568.webp"
     },
     "source": "https://intl.jacksonguitars.com/products/js-series-kelly-js32t"
   },
@@ -678,6 +725,12 @@ export const guitars: Guitar[] = [
       "quote": "Tuve varias Epiphone Flying V y esta es muy superior a las anteriores. Los bordes redondeados del diapasón y el trabajo de trastes son excelentes para la comodidad, y afina y se queda afinada muy bien. Es liviana y está bien balanceada: no tuve nada de neck dive.",
       "sourceLabel": "Comprador verificado en zZounds",
       "sourceUrl": "https://www.zzounds.com/productreview--EPIEIFV"
+    },
+    "video": {
+      "id": "YwTcYpSofiY",
+      "title": "Epiphone Flying V Ebony Demo & Review - Everything You Need To Know",
+      "channel": "OfficialEpiphone",
+      "thumb": "video/EIFVEBNH1.webp"
     },
     "source": "https://www.gibson.com/products/epiphone-flying-v-ebony"
   },
@@ -785,6 +838,12 @@ export const guitars: Guitar[] = [
       }
     ],
     "review": null,
+    "video": {
+      "id": "ud-kXf7CExs",
+      "title": "NEWEN GUITARS - TL",
+      "channel": "Tevelam",
+      "thumb": "video/TL.webp"
+    },
     "source": "https://www.newenguitars.com/product-page/newen-tl"
   },
   {
@@ -881,6 +940,12 @@ export const guitars: Guitar[] = [
       }
     ],
     "review": null,
+    "video": {
+      "id": "_TZlixdVETs",
+      "title": "OTRAS VOCES - Ranger Les Paul - Review",
+      "channel": "otrasvocesrock",
+      "thumb": "video/MLAU185297625.webp"
+    },
     "source": "https://www.mercadolibre.com.ar/guitarra-electrica-ranger-con-funda--azul-profundo/up/MLAU185297625"
   },
   {
@@ -1034,6 +1099,12 @@ export const guitars: Guitar[] = [
       "quote": "La MH-103QM no tiene ni el aspecto ni el rendimiento de una eléctrica de entrada. Performance con carácter, y una ficha técnica impresionante para lo que cuesta. Emociones fuertes para rockeros exigentes.",
       "sourceLabel": "MusicRadar",
       "sourceUrl": "https://www.musicradar.com/reviews/guitars/esp-ltd-mh-103qm-158065"
+    },
+    "video": {
+      "id": "8CvoDEqOc_U",
+      "title": "ESP LTD MH 103 Quilted Maple Electric Guitar Demo",
+      "channel": "Guitar Center",
+      "thumb": "video/LMH103QMSTB.webp"
     },
     "source": "https://reverb.com/p/esp-ltd-mh-103-qm"
   }

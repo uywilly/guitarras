@@ -9,8 +9,9 @@
     "lint": "oxlint",
     "preview": "vite preview",
     "images": "python3 scripts/prepare_images.py",
+    "videos": "python3 scripts/prepare_videos.py",
     "data": "python3 scripts/parse_md.py",
-    "sync": "npm run images && npm run data"
+    "sync": "npm run images && npm run videos && npm run data"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.3.3",

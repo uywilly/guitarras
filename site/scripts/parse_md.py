@@ -116,6 +116,19 @@ def parse():
                 "sourceUrl": m.group(2),
             }
 
+        # Every id here was checked against YouTube's oembed endpoint: the video
+        # exists and allows embedding. Half the collection has a demo on the
+        # maker's own channel; the rest fall back to a shop or reviewer demo of
+        # the same model.
+        video = None
+        m = re.search(r"\[([^\]]+)\]\([^)]*[?&]v=([\w-]{11})", fields.get("Video", ""))
+        if m:
+            video = {
+                "id": m.group(2),
+                "title": m.group(1),
+                "channel": fields.get("Canal del video", ""),
+            }
+
         # Trailing asterisks are footnote markers pointing at the Notas section,
         # not part of the code.
         raw_code = fields.get("Código de modelo", "").rstrip("* ")
@@ -124,7 +137,7 @@ def parse():
         # Specs = everything except what the header and the quote already show.
         skip = {
             "Código de modelo", "Marca", "Serie", "Fuente", "Tipo", "Fabricación",
-            "Reseña", "Fuente de la reseña",
+            "Reseña", "Fuente de la reseña", "Video", "Canal del video",
         }
         specs = [
             {"label": label, "value": value}
@@ -151,6 +164,9 @@ def parse():
                 "thumbs": [f"images/{code}/{s[:2]}_t.webp" for s in shots],
                 "specs": specs,
                 "review": review,
+                # The poster frame is served from here, not from YouTube: no
+                # request leaves for Google until the video is actually opened.
+                "video": {**video, "thumb": f"video/{code}.webp"} if video else None,
                 "source": source,
             }
         )
@@ -166,6 +182,10 @@ def main():
         "// Generated from Guitarras.md — edit that file and re-run scripts/parse_md.py.\n"
         "export interface Spec {\n  label: string;\n  value: string;\n}\n\n"
         "export interface Review {\n  quote: string;\n  sourceLabel: string;\n  sourceUrl: string;\n}\n\n"
+        "export interface Video {\n  /** YouTube id — checked to exist and to allow embedding. */\n"
+        "  id: string;\n  title: string;\n  channel: string;\n"
+        "  /** Locally hosted poster frame, so no request reaches YouTube unplayed. */\n"
+        "  thumb: string;\n}\n\n"
         "export interface Guitar {\n"
         "  id: string;\n  code: string;\n  name: string;\n  short: string;\n  brand: string;\n"
         "  series: string;\n  type: string;\n  origin: string;\n  accent: string;\n"
@@ -173,7 +193,9 @@ def main():
         "  imageKind: 'cutout' | 'photo';\n"
         "  images: string[];\n  thumbs: string[];\n  specs: Spec[];\n"
         "  /** null when no real review of this exact model exists. */\n"
-        "  review: Review | null;\n  source: string;\n}\n\n"
+        "  review: Review | null;\n"
+        "  /** null when no embeddable demo of the model was found. */\n"
+        "  video: Video | null;\n  source: string;\n}\n\n"
         f"export const guitars: Guitar[] = {body};\n",
         encoding="utf-8",
     )

@@ -27,6 +27,8 @@
 - Reseña: “La calidad acá es difícil de superar en cualquier Jaguar de menos de mil dólares. Las pastillas suenan como corresponde y la guitarra se ve y se siente bien construida. Me veo tocándola durante años.”  
 - Fuente de la reseña: [Comprador verificado en zZounds](https://www.zzounds.com/productreview--SQU0374090)  
 - Fuente: [https://intl.fender.com/products/classic-vibe-70s-jaguar](https://intl.fender.com/products/classic-vibe-70s-jaguar)
+- Video: [Fender Squier Classic Vibe '70s Jaguar \- Surf Green](https://www.youtube.com/watch?v=fjhOBcHYwEA)  
+- Canal del video: Tapestry Music  
 
 ---
 
@@ -54,6 +56,8 @@
 - Incluye: Hard Case \+ Certificate of Authenticity  
 - Peso aproximado: 4,2–4,8 kg  
 - Fuente: [https://www.gibson.com/products/epiphone-joe-bonamassa-59-les-paul-custom-antique-ebony](https://www.gibson.com/products/epiphone-joe-bonamassa-59-les-paul-custom-antique-ebony)
+- Video: [Introducing the Epiphone Joe Bonamassa ’59 Les Paul Custom](https://www.youtube.com/watch?v=iL8i9HB-Fc0)  
+- Canal del video: OfficialEpiphone  
 
 ---
 
@@ -83,6 +87,8 @@
 - Reseña: “Fue una sorpresa, y de las buenas. La guitarra no necesitó ningún ajuste. Toca y suena muy bien. Tengo muchas SG y Les Paul Gibson: toca mejor que algunas de mis SG Gibson.”  
 - Fuente de la reseña: [Comprador verificado en zZounds](https://www.zzounds.com/productreview--EPIEISC)  
 - Fuente: [https://www.gibson.com/products/epiphone-sg-custom-ebony](https://www.gibson.com/products/epiphone-sg-custom-ebony)
+- Video: [Epiphone SG Custom Ebony | NAMM 2020 | SOUNDBITES](https://www.youtube.com/watch?v=k43bn9gA7jY)  
+- Canal del video: guitarguitar  
 
 ---
 
@@ -110,6 +116,8 @@
 - Reseña: “Me acaba de llegar mi Ibanez electroacústica Advanced: instrumento hermoso, gran sonido.”  
 - Fuente de la reseña: [Comprador verificado en zZounds](https://www.zzounds.com/productreview--IBAAAD50CE)  
 - Fuente: [https://www.ibanez.com/eu/products/detail/aad50ce\_1x\_04.html](https://www.ibanez.com/eu/products/detail/aad50ce_1x_04.html)
+- Video: [Ibanez Advanced Acoustic AAD50CE](https://www.youtube.com/watch?v=sY2gNo_oQ7Q)  
+- Canal del video: Ibanez Guitars  
 
 ---
 
@@ -137,6 +145,8 @@
 - Reseña: “La Strat de los '50 luce como debe, toca maravillosamente y suena auténtica. Si no llegás a la Fender Classic Series '50s Stratocaster, esta es definitivamente la guitarra a comprar.”  
 - Fuente de la reseña: [MusicRadar](https://www.musicradar.com/reviews/guitars/squier-classic-vibe-stratocaster-50s-175425)  
 - Fuente: [https://intl.fender.com/products/classic-vibe-50s-stratocaster](https://intl.fender.com/products/classic-vibe-50s-stratocaster)
+- Video: [Squier Classic Vibe 50s Stratocaster Demo For Beginners](https://www.youtube.com/watch?v=j8lBH0Mr3QM)  
+- Canal del video: Fender  
 
 ---
 
@@ -164,6 +174,8 @@
 - Reseña: “Creo que es una de las mejores guitarras por su precio en el mercado. Me encanta el encordado a través del cuerpo. Es simplemente una buena guitarra apenas la sacás de la caja: tiene un mástil rápido y muy buen tono.”  
 - Fuente de la reseña: [Comprador verificado en zZounds](https://www.zzounds.com/productreview--JAC2910023)  
 - Fuente: [https://intl.jacksonguitars.com/products/js-series-kelly-js32t](https://intl.jacksonguitars.com/products/js-series-kelly-js32t)
+- Video: [Jackson JS32T and JS32 Kelly Demo | Featured Demo](https://www.youtube.com/watch?v=d4-R4vFj0C4)  
+- Canal del video: Jackson Guitars  
 
 ---
 
@@ -192,6 +204,8 @@
 - Reseña: “Tuve varias Epiphone Flying V y esta es muy superior a las anteriores. Los bordes redondeados del diapasón y el trabajo de trastes son excelentes para la comodidad, y afina y se queda afinada muy bien. Es liviana y está bien balanceada: no tuve nada de neck dive.”  
 - Fuente de la reseña: [Comprador verificado en zZounds](https://www.zzounds.com/productreview--EPIEIFV)  
 - Fuente: [https://www.gibson.com/products/epiphone-flying-v-ebony](https://www.gibson.com/products/epiphone-flying-v-ebony)
+- Video: [Epiphone Flying V Ebony Demo & Review \- Everything You Need To Know](https://www.youtube.com/watch?v=YwTcYpSofiY)  
+- Canal del video: OfficialEpiphone  
 
 ---
 
@@ -225,6 +239,8 @@
 - Acabado del mástil: Satin Polyurethane  
 - Peso aproximado: 3,5 kg  
 - Fuente: [https://www.newenguitars.com/product-page/newen-tl](https://www.newenguitars.com/product-page/newen-tl)
+- Video: [NEWEN GUITARS \- TL](https://www.youtube.com/watch?v=ud-kXf7CExs)  
+- Canal del video: Tevelam  
 
 ## ---
 
@@ -253,6 +269,8 @@
 - Incluye: Funda acolchada  
 - Peso aproximado: N/D  
 - Fuente: [https://www.mercadolibre.com.ar/guitarra-electrica-ranger-con-funda--azul-profundo/up/MLAU185297625](https://www.mercadolibre.com.ar/guitarra-electrica-ranger-con-funda--azul-profundo/up/MLAU185297625)
+- Video: [OTRAS VOCES \- Ranger Les Paul \- Review](https://www.youtube.com/watch?v=_TZlixdVETs)  
+- Canal del video: otrasvocesrock  
 
 ---
 
@@ -295,6 +313,8 @@
 - Reseña: “La MH-103QM no tiene ni el aspecto ni el rendimiento de una eléctrica de entrada. Performance con carácter, y una ficha técnica impresionante para lo que cuesta. Emociones fuertes para rockeros exigentes.”  
 - Fuente de la reseña: [MusicRadar](https://www.musicradar.com/reviews/guitars/esp-ltd-mh-103qm-158065)  
 - Fuente: [https://reverb.com/p/esp-ltd-mh-103-qm](https://reverb.com/p/esp-ltd-mh-103-qm)
+- Video: [ESP LTD MH 103 Quilted Maple Electric Guitar Demo](https://www.youtube.com/watch?v=8CvoDEqOc_U)  
+- Canal del video: Guitar Center  
 
 ---
 
