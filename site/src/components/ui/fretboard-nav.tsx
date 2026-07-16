@@ -13,6 +13,9 @@ interface FretboardNavProps {
  * exactly the job here: one dot per instrument, the active one lit in that
  * guitar's own finish colour. Bone nut on the left, nickel fret wires between.
  */
+/** Drag distance that advances one position. */
+const SWIPE_STEP = 56;
+
 export function FretboardNav({ guitars, activeIndex, onSelect }: FretboardNavProps) {
   const activeRef = useRef<HTMLLIElement>(null);
 
@@ -22,10 +25,51 @@ export function FretboardNav({ guitars, activeIndex, onSelect }: FretboardNavPro
     activeRef.current?.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
   }, [activeIndex]);
 
+  // Sliding the strip moves the selection, like sliding a hand along the neck.
+  // A drag can cross several positions before React has re-rendered any of
+  // them, so the count is kept in a ref rather than read back off the prop.
+  const cursor = useRef(activeIndex);
+  useEffect(() => {
+    cursor.current = activeIndex;
+  }, [activeIndex]);
+
+  const origin = useRef<number | null>(null);
+  const dragged = useRef(false);
+
+  const onPointerDown = (event: React.PointerEvent) => {
+    if (event.pointerType === "mouse" && event.button !== 0) return;
+    origin.current = event.clientX;
+    dragged.current = false;
+  };
+
+  const onPointerMove = (event: React.PointerEvent) => {
+    if (origin.current === null) return;
+    const steps = Math.trunc((event.clientX - origin.current) / SWIPE_STEP);
+    if (steps === 0) return;
+    // Captured only once a drag is real: capturing on pointerdown would
+    // retarget the click of an ordinary tap away from its dot.
+    if (!dragged.current) event.currentTarget.setPointerCapture(event.pointerId);
+    // Dragging left pulls the next guitar in from the right.
+    cursor.current -= steps;
+    onSelect(cursor.current);
+    origin.current += steps * SWIPE_STEP;
+    dragged.current = true;
+  };
+
+  const endDrag = () => {
+    origin.current = null;
+  };
+
   return (
     <nav
       aria-label="Elegir guitarra"
-      className="flex items-stretch overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+      onPointerDown={onPointerDown}
+      onPointerMove={onPointerMove}
+      onPointerUp={endDrag}
+      onPointerCancel={endDrag}
+      // pan-y hands vertical scrolling back to the page and keeps the
+      // horizontal axis for the drag above.
+      className="flex touch-pan-y items-stretch overflow-x-auto select-none [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
     >
       {/* Nut — bone, like every nut in these specs. */}
       <div aria-hidden className="sticky left-0 z-10 w-[3px] shrink-0 rounded-l-[2px] bg-bone/70" />
@@ -50,7 +94,8 @@ export function FretboardNav({ guitars, activeIndex, onSelect }: FretboardNavPro
               )}
               <button
                 type="button"
-                onClick={() => onSelect(index)}
+                // A drag that ends over a dot is a swipe, not a pick.
+                onClick={() => !dragged.current && onSelect(index)}
                 aria-current={active ? "true" : undefined}
                 className="group flex h-full w-full cursor-pointer flex-col items-center gap-2 border-0 bg-transparent px-1 py-3 sm:py-4"
                 title={guitar.name}
