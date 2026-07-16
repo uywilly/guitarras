@@ -160,6 +160,28 @@ function SpecPanel({
         ))}
       </dl>
 
+      {guitar.review && (
+        <figure
+          className="mt-8 border-l-2 pl-5"
+          style={{ borderColor: guitar.accent }}
+        >
+          <blockquote className="font-display m-0 text-lg leading-snug text-balance text-bone italic">
+            {guitar.review.quote}
+          </blockquote>
+          <figcaption className="mt-3">
+            <a
+              href={guitar.review.sourceUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-1.5 font-mono text-[11px] tracking-wide text-nickel no-underline transition-colors hover:text-bone"
+            >
+              {guitar.review.sourceLabel}
+              <ArrowUpRight className="size-3" />
+            </a>
+          </figcaption>
+        </figure>
+      )}
+
       <div className="mt-8 flex flex-wrap items-center justify-between gap-4">
         <span className="font-mono text-xs tracking-[0.12em] text-nickel">{guitar.code}</span>
         <a

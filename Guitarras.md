@@ -24,6 +24,8 @@
 - Clavijas: Vintage Style  
 - Hardware: Nickel  
 - Peso aproximado: 3,6–3,9 kg  
+- Reseña: “La calidad acá es difícil de superar en cualquier Jaguar de menos de mil dólares. Las pastillas suenan como corresponde y la guitarra se ve y se siente bien construida. Me veo tocándola durante años.”  
+- Fuente de la reseña: [Comprador verificado en zZounds](https://www.zzounds.com/productreview--SQU0374090)  
 - Fuente: [https://intl.fender.com/products/classic-vibe-70s-jaguar](https://intl.fender.com/products/classic-vibe-70s-jaguar)
 
 ---
@@ -78,6 +80,8 @@
 - Hardware: Gold  
 - Incluye: Premium Gig Bag  
 - Peso aproximado: 3,0–3,4 kg  
+- Reseña: “Fue una sorpresa, y de las buenas. La guitarra no necesitó ningún ajuste. Toca y suena muy bien. Tengo muchas SG y Les Paul Gibson: toca mejor que algunas de mis SG Gibson.”  
+- Fuente de la reseña: [Comprador verificado en zZounds](https://www.zzounds.com/productreview--EPIEISC)  
 - Fuente: [https://www.gibson.com/products/epiphone-sg-custom-ebony](https://www.gibson.com/products/epiphone-sg-custom-ebony)
 
 ---
@@ -103,6 +107,8 @@
 - Puente: Purpleheart  
 - Clavijas: Die-Cast Chrome (18:1)  
 - Hardware: Chrome  
+- Reseña: “Me acaba de llegar mi Ibanez electroacústica Advanced: instrumento hermoso, gran sonido.”  
+- Fuente de la reseña: [Comprador verificado en zZounds](https://www.zzounds.com/productreview--IBAAAD50CE)  
 - Fuente: [https://www.ibanez.com/eu/products/detail/aad50ce\_1x\_04.html](https://www.ibanez.com/eu/products/detail/aad50ce_1x_04.html)
 
 ---
@@ -128,6 +134,8 @@
 - Clavijas: Vintage Style  
 - Hardware: Nickel  
 - Peso aproximado: 3,3–3,7 kg  
+- Reseña: “La Strat de los '50 luce como debe, toca maravillosamente y suena auténtica. Si no llegás a la Fender Classic Series '50s Stratocaster, esta es definitivamente la guitarra a comprar.”  
+- Fuente de la reseña: [MusicRadar](https://www.musicradar.com/reviews/guitars/squier-classic-vibe-stratocaster-50s-175425)  
 - Fuente: [https://intl.fender.com/products/classic-vibe-50s-stratocaster](https://intl.fender.com/products/classic-vibe-50s-stratocaster)
 
 ---
@@ -153,6 +161,8 @@
 - Clavijas: Jackson Sealed Die-Cast  
 - Hardware: Black  
 - Peso aproximado: 3,4–3,8 kg  
+- Reseña: “Creo que es una de las mejores guitarras por su precio en el mercado. Me encanta el encordado a través del cuerpo. Es simplemente una buena guitarra apenas la sacás de la caja: tiene un mástil rápido y muy buen tono.”  
+- Fuente de la reseña: [Comprador verificado en zZounds](https://www.zzounds.com/productreview--JAC2910023)  
 - Fuente: [https://intl.jacksonguitars.com/products/js-series-kelly-js32t](https://intl.jacksonguitars.com/products/js-series-kelly-js32t)
 
 ---
@@ -179,6 +189,8 @@
 - Clavijas: Grover Rotomatic (18:1)  
 - Hardware: Nickel  
 - Peso aproximado: 3,1–3,5 kg  
+- Reseña: “Tuve varias Epiphone Flying V y esta es muy superior a las anteriores. Los bordes redondeados del diapasón y el trabajo de trastes son excelentes para la comodidad, y afina y se queda afinada muy bien. Es liviana y está bien balanceada: no tuve nada de neck dive.”  
+- Fuente de la reseña: [Comprador verificado en zZounds](https://www.zzounds.com/productreview--EPIEIFV)  
 - Fuente: [https://www.gibson.com/products/epiphone-flying-v-ebony](https://www.gibson.com/products/epiphone-flying-v-ebony)
 
 ---
@@ -280,6 +292,8 @@
 - Hardware: Black Nickel  
 - Peso aproximado: 3,2 kg; puede variar según la unidad y el puente instalado  
 - Estado del modelo: Descontinuado  
+- Reseña: “La MH-103QM no tiene ni el aspecto ni el rendimiento de una eléctrica de entrada. Performance con carácter, y una ficha técnica impresionante para lo que cuesta. Emociones fuertes para rockeros exigentes.”  
+- Fuente de la reseña: [MusicRadar](https://www.musicradar.com/reviews/guitars/esp-ltd-mh-103qm-158065)  
 - Fuente: [https://reverb.com/p/esp-ltd-mh-103-qm](https://reverb.com/p/esp-ltd-mh-103-qm)
 
 ---

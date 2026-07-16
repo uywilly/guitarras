@@ -4,6 +4,12 @@ export interface Spec {
   value: string;
 }
 
+export interface Review {
+  quote: string;
+  sourceLabel: string;
+  sourceUrl: string;
+}
+
 export interface Guitar {
   id: string;
   code: string;
@@ -19,6 +25,8 @@ export interface Guitar {
   images: string[];
   thumbs: string[];
   specs: Spec[];
+  /** null when no real review of this exact model exists. */
+  review: Review | null;
   source: string;
 }
 
@@ -110,6 +118,11 @@ export const guitars: Guitar[] = [
         "value": "3,6–3,9 kg"
       }
     ],
+    "review": {
+      "quote": "La calidad acá es difícil de superar en cualquier Jaguar de menos de mil dólares. Las pastillas suenan como corresponde y la guitarra se ve y se siente bien construida. Me veo tocándola durante años.",
+      "sourceLabel": "Comprador verificado en zZounds",
+      "sourceUrl": "https://www.zzounds.com/productreview--SQU0374090"
+    },
     "source": "https://intl.fender.com/products/classic-vibe-70s-jaguar"
   },
   {
@@ -203,6 +216,7 @@ export const guitars: Guitar[] = [
         "value": "4,2–4,8 kg"
       }
     ],
+    "review": null,
     "source": "https://www.gibson.com/products/epiphone-joe-bonamassa-59-les-paul-custom-antique-ebony"
   },
   {
@@ -296,6 +310,11 @@ export const guitars: Guitar[] = [
         "value": "3,0–3,4 kg"
       }
     ],
+    "review": {
+      "quote": "Fue una sorpresa, y de las buenas. La guitarra no necesitó ningún ajuste. Toca y suena muy bien. Tengo muchas SG y Les Paul Gibson: toca mejor que algunas de mis SG Gibson.",
+      "sourceLabel": "Comprador verificado en zZounds",
+      "sourceUrl": "https://www.zzounds.com/productreview--EPIEISC"
+    },
     "source": "https://www.gibson.com/products/epiphone-sg-custom-ebony"
   },
   {
@@ -381,6 +400,11 @@ export const guitars: Guitar[] = [
         "value": "Chrome"
       }
     ],
+    "review": {
+      "quote": "Me acaba de llegar mi Ibanez electroacústica Advanced: instrumento hermoso, gran sonido.",
+      "sourceLabel": "Comprador verificado en zZounds",
+      "sourceUrl": "https://www.zzounds.com/productreview--IBAAAD50CE"
+    },
     "source": "https://www.ibanez.com/eu/products/detail/aad50ce_1x_04.html"
   },
   {
@@ -466,6 +490,11 @@ export const guitars: Guitar[] = [
         "value": "3,3–3,7 kg"
       }
     ],
+    "review": {
+      "quote": "La Strat de los '50 luce como debe, toca maravillosamente y suena auténtica. Si no llegás a la Fender Classic Series '50s Stratocaster, esta es definitivamente la guitarra a comprar.",
+      "sourceLabel": "MusicRadar",
+      "sourceUrl": "https://www.musicradar.com/reviews/guitars/squier-classic-vibe-stratocaster-50s-175425"
+    },
     "source": "https://intl.fender.com/products/classic-vibe-50s-stratocaster"
   },
   {
@@ -551,6 +580,11 @@ export const guitars: Guitar[] = [
         "value": "3,4–3,8 kg"
       }
     ],
+    "review": {
+      "quote": "Creo que es una de las mejores guitarras por su precio en el mercado. Me encanta el encordado a través del cuerpo. Es simplemente una buena guitarra apenas la sacás de la caja: tiene un mástil rápido y muy buen tono.",
+      "sourceLabel": "Comprador verificado en zZounds",
+      "sourceUrl": "https://www.zzounds.com/productreview--JAC2910023"
+    },
     "source": "https://intl.jacksonguitars.com/products/js-series-kelly-js32t"
   },
   {
@@ -640,6 +674,11 @@ export const guitars: Guitar[] = [
         "value": "3,1–3,5 kg"
       }
     ],
+    "review": {
+      "quote": "Tuve varias Epiphone Flying V y esta es muy superior a las anteriores. Los bordes redondeados del diapasón y el trabajo de trastes son excelentes para la comodidad, y afina y se queda afinada muy bien. Es liviana y está bien balanceada: no tuve nada de neck dive.",
+      "sourceLabel": "Comprador verificado en zZounds",
+      "sourceUrl": "https://www.zzounds.com/productreview--EPIEIFV"
+    },
     "source": "https://www.gibson.com/products/epiphone-flying-v-ebony"
   },
   {
@@ -745,6 +784,7 @@ export const guitars: Guitar[] = [
         "value": "3,5 kg"
       }
     ],
+    "review": null,
     "source": "https://www.newenguitars.com/product-page/newen-tl"
   },
   {
@@ -840,6 +880,7 @@ export const guitars: Guitar[] = [
         "value": "N/D"
       }
     ],
+    "review": null,
     "source": "https://www.mercadolibre.com.ar/guitarra-electrica-ranger-con-funda--azul-profundo/up/MLAU185297625"
   },
   {
@@ -989,6 +1030,11 @@ export const guitars: Guitar[] = [
         "value": "Descontinuado"
       }
     ],
+    "review": {
+      "quote": "La MH-103QM no tiene ni el aspecto ni el rendimiento de una eléctrica de entrada. Performance con carácter, y una ficha técnica impresionante para lo que cuesta. Emociones fuertes para rockeros exigentes.",
+      "sourceLabel": "MusicRadar",
+      "sourceUrl": "https://www.musicradar.com/reviews/guitars/esp-ltd-mh-103qm-158065"
+    },
     "source": "https://reverb.com/p/esp-ltd-mh-103-qm"
   }
 ];

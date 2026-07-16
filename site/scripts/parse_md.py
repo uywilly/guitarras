@@ -105,13 +105,27 @@ def parse():
         if m:
             source = m.group(2)
 
+        # A review only exists when there is a real, linkable source for it.
+        # Seven of the ten guitars have one; the rest render without a quote.
+        review = None
+        m = re.search(r"\[([^\]]+)\]\(([^)]+)\)", fields.get("Fuente de la reseña", ""))
+        if m and fields.get("Reseña"):
+            review = {
+                "quote": fields["Reseña"].strip("“”\" "),
+                "sourceLabel": m.group(1),
+                "sourceUrl": m.group(2),
+            }
+
         # Trailing asterisks are footnote markers pointing at the Notas section,
         # not part of the code.
         raw_code = fields.get("Código de modelo", "").rstrip("* ")
         code = CODE_FIX.get(raw_code, raw_code.split()[0].rstrip("*") if raw_code else "")
 
-        # Specs = everything except what the header already shows.
-        skip = {"Código de modelo", "Marca", "Serie", "Fuente", "Tipo", "Fabricación"}
+        # Specs = everything except what the header and the quote already show.
+        skip = {
+            "Código de modelo", "Marca", "Serie", "Fuente", "Tipo", "Fabricación",
+            "Reseña", "Fuente de la reseña",
+        }
         specs = [
             {"label": label, "value": value}
             for label, value in merged
@@ -136,6 +150,7 @@ def parse():
                 "images": [f"images/{code}/{s}" for s in shots],
                 "thumbs": [f"images/{code}/{s[:2]}_t.webp" for s in shots],
                 "specs": specs,
+                "review": review,
                 "source": source,
             }
         )
@@ -150,12 +165,15 @@ def main():
     OUT.write_text(
         "// Generated from Guitarras.md — edit that file and re-run scripts/parse_md.py.\n"
         "export interface Spec {\n  label: string;\n  value: string;\n}\n\n"
+        "export interface Review {\n  quote: string;\n  sourceLabel: string;\n  sourceUrl: string;\n}\n\n"
         "export interface Guitar {\n"
         "  id: string;\n  code: string;\n  name: string;\n  short: string;\n  brand: string;\n"
         "  series: string;\n  type: string;\n  origin: string;\n  accent: string;\n"
         "  /** cutout: the guitar floats free. photo: a real photograph, framed. */\n"
         "  imageKind: 'cutout' | 'photo';\n"
-        "  images: string[];\n  thumbs: string[];\n  specs: Spec[];\n  source: string;\n}\n\n"
+        "  images: string[];\n  thumbs: string[];\n  specs: Spec[];\n"
+        "  /** null when no real review of this exact model exists. */\n"
+        "  review: Review | null;\n  source: string;\n}\n\n"
         f"export const guitars: Guitar[] = {body};\n",
         encoding="utf-8",
     )
