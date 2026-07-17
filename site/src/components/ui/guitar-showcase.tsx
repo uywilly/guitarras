@@ -5,10 +5,24 @@ import { guitars } from "@/data/guitars";
 import { FretboardNav } from "./fretboard-nav";
 import { SideRays } from "./side-rays";
 
+/** True on phone-width screens. */
+function useNarrow() {
+  const query = "(max-width: 640px)";
+  const [narrow, setNarrow] = useState(() => window.matchMedia(query).matches);
+  useEffect(() => {
+    const mq = window.matchMedia(query);
+    const sync = () => setNarrow(mq.matches);
+    mq.addEventListener("change", sync);
+    return () => mq.removeEventListener("change", sync);
+  }, []);
+  return narrow;
+}
+
 export function GuitarShowcase() {
   const [index, setIndex] = useState(0);
   const [shot, setShot] = useState(0);
   const guitar = guitars[index];
+  const narrow = useNarrow();
 
   const select = useCallback((next: number) => {
     setIndex(((next % guitars.length) + guitars.length) % guitars.length);
@@ -34,7 +48,12 @@ export function GuitarShowcase() {
   }, [goPrev, goNext]);
 
   return (
-    <div className="mx-auto flex min-h-dvh max-w-6xl flex-col px-5 sm:px-8">
+    // The page itself never scrolls: the box is exactly the dynamic viewport
+    // and the specs scroll inside it. A bottom bar pinned by sticky/fixed
+    // instead hangs off the layout viewport, which mobile browsers keep at
+    // full height while the URL bar is up — putting the neck out of reach
+    // until you scrolled. dvh follows the bar; this way the neck can't leave.
+    <div className="mx-auto flex h-dvh max-w-6xl flex-col overflow-hidden px-5 sm:px-8">
       {/* Raking light across the whole page, in the finish of whichever guitar
           is up — the same accent the inlay dot and the spec rule already use.
           It sits under the content and takes no clicks. */}
@@ -44,23 +63,29 @@ export function GuitarShowcase() {
           rayColor1={guitar.accent}
           rayColor2="#e8e3d9"
           speed={1.6}
-          intensity={2.4}
           spread={1.6}
           saturation={1.1}
           blend={0.28}
           falloff={1.5}
-          opacity={1}
+          // The source sits just off the right edge, so on a phone it is far
+          // closer to the page than on a desktop and the same numbers glare —
+          // enough to wash out the header. Pulled back to match what a wide
+          // screen actually shows.
+          intensity={narrow ? 2.1 : 2.4}
+          opacity={narrow ? 0.85 : 1}
         />
       </div>
 
       <Header />
 
-      <main className="flex flex-1 flex-col gap-10 py-8 lg:flex-row lg:gap-14 lg:py-12">
+      {/* min-h-0 or the flex child refuses to shrink and scrolls the page instead. */}
+      <main className="flex min-h-0 flex-1 flex-col gap-10 overflow-y-auto py-8 lg:flex-row lg:gap-14 lg:py-12">
         <ImageStage guitar={guitar} shot={shot} onShot={setShot} />
         <SpecPanel guitar={guitar} onPrev={goPrev} onNext={goNext} />
       </main>
 
-      <div className="sticky bottom-0 -mx-5 border-t border-rule bg-rosewood/95 px-5 pb-[env(safe-area-inset-bottom)] backdrop-blur-sm sm:-mx-8 sm:px-8">
+      {/* Last child of the viewport-sized box, so it is simply always there. */}
+      <div className="-mx-5 shrink-0 border-t border-rule bg-rosewood/95 px-5 pb-[env(safe-area-inset-bottom)] sm:-mx-8 sm:px-8">
         <FretboardNav guitars={guitars} activeIndex={index} onSelect={select} />
       </div>
     </div>
@@ -69,7 +94,7 @@ export function GuitarShowcase() {
 
 function Header() {
   return (
-    <header className="flex items-baseline justify-between border-b border-rule py-6">
+    <header className="flex shrink-0 items-baseline justify-between border-b border-rule py-6">
       <span className="font-mono text-[11px] tracking-[0.2em] text-nickel uppercase">
         La colección
       </span>
