@@ -213,7 +213,11 @@ function ImageStage({
       )}
 
       {(guitar.images.length > 1 || video) && (
-        <ul className="mt-3 flex list-none items-center gap-2 p-0">
+        // Wraps rather than overflows: the video frame is wider than a photo
+        // thumb, and the row of both is wider than a phone. An overflow here
+        // would land in main, whose overflow-x computes to auto next to the
+        // overflow-y it needs — a sideways scroll on the whole page.
+        <ul className="mt-3 flex list-none flex-wrap items-center gap-2 p-0">
           {guitar.thumbs.map((thumb, i) => (
             <li key={thumb}>
               <button
@@ -311,12 +315,18 @@ function SpecPanel({
         {guitar.specs.map((spec) => (
           <div
             key={spec.label}
-            className="flex items-baseline justify-between gap-4 border-b border-rule py-2.5"
+            className="flex flex-wrap items-baseline justify-between gap-x-4 border-b border-rule py-2.5"
           >
             <dt className="shrink-0 text-xs tracking-wide text-nickel">
               {spec.label}
             </dt>
-            <dd className="m-0 text-right font-mono text-xs text-bone">
+            {/* Basing the value on its longest word, not its full text, is what
+                keeps the wrap honest: it drops to its own line only when even
+                that word can't sit beside the label — "No identificado" under
+                "Modelo exacto del Gotoh", the one pair in the collection that
+                doesn't fit. Long values still wrap beside their label as
+                before, and growing keeps them flush right either way. */}
+            <dd className="m-0 grow [flex-basis:min-content] text-right font-mono text-xs text-bone">
               {spec.value}
             </dd>
           </div>
